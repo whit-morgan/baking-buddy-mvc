@@ -2,19 +2,19 @@ const Recipe = require('../models/Recipes')
 
 module.exports = {
     getRecipes: async (req,res)=>{
-        console.log(req.user)
+
         try{
             const recipes = await Recipe.find({userId:req.user.id})
-            
-            res.render('recipes.ejs', {recipes: recipes,})
-            console.log(recipes)
+            const publicRecipes = await Recipe.find({makePublic:"on"}) //trying to all recipes with the makePublic value of 'on'
+            res.render('recipes.ejs', {recipes: recipes, publicRecipes: publicRecipes})
+            console.log( recipes, publicRecipes)
         }catch(err){
             console.log(err)
         }
     },
     createRecipe: async (req, res)=>{
         try{
-            await Recipe.create({recipeName: req.body.recipeName, userId: req.user.id, category:req.body.category,public: req.body.makePublic, instructions: req.body.instructions})
+            await Recipe.create({recipeName: req.body.recipeName, userId: req.user.id, category:req.body.category,makePublic: req.body.makePublic, instructions: req.body.instructions})
             console.log('Recipe has been added!')
             res.redirect('/recipes')
         }catch(err){
