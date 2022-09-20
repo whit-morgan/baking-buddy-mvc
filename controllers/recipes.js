@@ -6,8 +6,8 @@ module.exports = {
         try{
             const recipes = await Recipe.find({userId:req.user.id})
             const publicRecipes = await Recipe.find({makePublic:"on"}) //trying to all recipes with the makePublic value of 'on'
-            res.render('recipes.ejs', {recipes: recipes, publicRecipes: publicRecipes})
-            console.log( recipes, publicRecipes)
+            res.render('recipes.ejs', {recipes: recipes, publicRecipes: publicRecipes, user: req.user})
+            console.log(req.user) 
         }catch(err){
             console.log(err)
         }
@@ -32,10 +32,10 @@ module.exports = {
         }
     },
     showFullRecipe: async (req, res) => {
-        console.log(req.user)
         try {
             const recipe = await Recipe.findById(req.params.id);
             res.render('fullRecipe.ejs', { recipe: recipe, user: req.user});
+            console.log(req.user)
         } catch (err) {
             console.log(err);
         }

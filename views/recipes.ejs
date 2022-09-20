@@ -54,14 +54,17 @@
             
     </section>
 
-
+<!---------Public Recipes------->
     <section>
         <div class="container border">
             <h1>Public Recipes</h1>
+            
+
             <ul>
-                <% publicRecipes.forEach( el => { %>
+            <% publicRecipes.filter( el => { %>
+                <% if(el.userId != user._id) {%>
                     <li class="" data-id="<%=el._id%>">
-                        <% if(el.recipeName != '') {%>
+                        
                         <span><%= el.recipeName %></span>
 
                         <a href="/fullRecipe/<%= el._id%>">
@@ -72,6 +75,7 @@
                         <% } %>
                     </li>
                 <% }) %>
+                
             </ul>
           </div>
             
@@ -136,16 +140,6 @@
             </div>
         </div>
 
-
-
-
-
-    
-
-    
-  
-
-    
 
     
 
