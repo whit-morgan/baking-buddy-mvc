@@ -7,6 +7,7 @@ const MongoStore = require('connect-mongo')(session)
 const flash = require('express-flash')
 const logger = require('morgan')
 const connectDB = require('./config/database')
+const methodOverride = require("method-override");
 const mainRoutes = require('./routes/main')
 const recipeRoutes = require('./routes/recipes')
 
@@ -31,7 +32,10 @@ app.use(
       store: new MongoStore({ mongooseConnection: mongoose.connection }),
     })
   )
-  
+ 
+//Use forms for put / delete
+app.use(methodOverride("_method"));  
+
 // Passport middleware
 app.use(passport.initialize())
 app.use(passport.session())
@@ -41,7 +45,8 @@ app.use(flash())
 app.use('/', mainRoutes)
 app.use('/recipes', recipeRoutes)
 app.use('/fullRecipe', recipeRoutes)
- 
+
+
 app.listen(process.env.PORT, ()=>{
     console.log('Server is running, you better catch it!')
 })    
