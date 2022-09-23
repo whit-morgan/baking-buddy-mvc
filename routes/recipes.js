@@ -9,6 +9,8 @@ router.get('/:id', ensureAuth, recipesController.showFullRecipe)
 
 router.get('/fullRecipe', recipesController.showFullRecipe)
 
+router.get('/publicRecipes', recipesController.getPublicRecipes) 
+
 router.post('/createRecipe', recipesController.createRecipe)
 
 router.delete('/deleteRecipe/:id', recipesController.deleteRecipe)

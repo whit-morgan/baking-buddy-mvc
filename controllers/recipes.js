@@ -2,11 +2,9 @@ const Recipe = require('../models/Recipes')
 
 module.exports = {
     getRecipes: async (req,res)=>{
-
         try{
             const recipes = await Recipe.find({userId:req.user.id})
-            const publicRecipes = await Recipe.find({makePublic:"on"}) //trying to all recipes with the makePublic value of 'on'
-            res.render('recipes.ejs', {recipes: recipes, publicRecipes: publicRecipes, user: req.user})
+            res.render('recipes.ejs', {recipes: recipes, user: req.user})
             console.log(req.user) 
         }catch(err){
             console.log(err)
@@ -21,16 +19,6 @@ module.exports = {
             console.log(err)
         }
     },
-    // deleteRecipe: async (req, res)=>{
-    //     console.log(req.body.recipeIdFromJSFile)
-    //     try{
-    //         await Recipe.findOneAndDelete({_id:req.body.recipeIdFromJSFile})
-    //         console.log('Deleted recipe')
-    //         res.json('Deleted It')
-    //     }catch(err){
-    //         console.log(err)
-    //     }
-    // },
     showFullRecipe: async (req, res) => {
         try {
             const recipe = await Recipe.findById(req.params.id);
@@ -40,6 +28,15 @@ module.exports = {
             console.log(err);
         }
       },
+    getPublicRecipes: async (req, res) => {
+        try{
+            const publicRecipes = await Recipe.find({makePublic:"on"}) //trying to all recipes with the makePublic value of 'on'
+            res.render('publicRecipes.ejs', {publicRecipes: publicRecipes, user: req.user})
+            console.log('bing bong') 
+        }catch(err){
+            console.log(err)
+        }
+    },
       deleteRecipe: async (req, res) => {
         try {
           // Find recipe by id

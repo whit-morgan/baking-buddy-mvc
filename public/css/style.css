@@ -41,3 +41,8 @@ i{
     background-color: #212529;
     color: white;
 }
+/* @media (max-width: 480px) {
+    .granMainPic{
+        display: none !important;
+    }
+} */
