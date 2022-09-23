@@ -4,6 +4,7 @@
 /* h2{
     text-align: center;
 } */
+
 .completed{
     text-decoration: line-through;
     color: gray;
@@ -27,4 +28,16 @@ i{
 }
 #formAndCompleted{
     margin-top: 5%;
+}
+.bg{
+    background-image: url("../assets/img/background.jpg");
+    height: 100vh;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.intro{
+    background-color: #212529;
+    color: white;
 }
