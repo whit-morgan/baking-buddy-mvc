@@ -1,31 +1,21 @@
+<!-- Header -->
 <%- include('partials/header') -%>
-<!---------Public Recipes------->
-    <section>
-        <div class="container border">
-            <h1>Public Recipes</h1>
-         <ul>
-            <% publicRecipes.filter( el => { %>
-                <% if(el.userId != user._id) {%>
-                    <li class="" data-id="<%=el._id%>">
-                        
-                        <span><%= el.recipeName %></span>
 
-                        <a href="/fullRecipe/<%= el._id%>">
-                            <span class = 'fa fa-eye'></span>
-                        </a>  
+<!-- Public Recipes Cards -->
+<% publicRecipes.filter( el => { %>
+    <% if(el.userId != user._id) {%>
+    <div class="card" style="width: 18rem;" data-id="<%=el._id%>">
+        <div class="card-body">
+        
+          <h5 class="card-title"><%= el.recipeName %></h5>
+          <h6 class="card-subtitle mb-2 text-muted">Category: <%= el.category %></h6>
+          <a href="/recipes/fullRecipe/<%= el._id%>" class="card-link">View Recipe</a>
+          <% } %>
+        </div>
+        <% }) %>
+      </div>
 
-                        <% } %>
-                    </li>
-                <% }) %>               
-            </ul>
-          </div>
-            
-    </section>
-    
 
-<!--Bootstrap and Popper Scripts-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
-</body>
-</html>
+
+<!-- Footer -->
+<%- include('partials/footer') -%>

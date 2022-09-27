@@ -46,3 +46,4 @@ Array.from(deleteBtn).forEach((el)=>{
 //     }
 // }
 
+const categoryFilter = document.querySelector('#categoryFilter').value

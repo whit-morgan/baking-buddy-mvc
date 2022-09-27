@@ -5,14 +5,16 @@ const { ensureAuth, ensureGuest } = require('../middleware/auth')
 
 router.get('/', ensureAuth, recipesController.getRecipes)
 
-router.get('/:id', ensureAuth, recipesController.showFullRecipe)
+router.get('/fullRecipe/:id', recipesController.showFullRecipe)
 
-router.get('/fullRecipe', recipesController.showFullRecipe)
+router.get('/category/:category', recipesController.getRecipesByCategory)
 
 router.get('/publicRecipes', recipesController.getPublicRecipes) 
 
 router.post('/createRecipe', recipesController.createRecipe)
 
 router.delete('/deleteRecipe/:id', recipesController.deleteRecipe)
+
+router.get('/:id', recipesController.showFullRecipe)
 
 module.exports = router

@@ -44,9 +44,6 @@ app.use(flash())
   
 app.use('/', mainRoutes)
 app.use('/recipes', recipeRoutes)
-app.use('/fullRecipe', recipeRoutes)
-app.use('/publicRecipes', recipeRoutes)
-
 
 app.listen(process.env.PORT, ()=>{
     console.log('Server is running, you better catch it!')
