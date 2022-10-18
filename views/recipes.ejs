@@ -37,19 +37,43 @@
 
 
 <!-- Saved Recipes Cards -->
-<section>
-<% recipes.forEach( el => { %>
-    <div class="card" style="width: 18rem;" data-id="<%=el._id%>">
+<div class="container card-container">
+    <h1>My Recipes</h1>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <% for(var i=0; i<recipes.length; i++) {%>
+    <div class="col">
+      <div class="card h-100">
+        
         <div class="card-body">
-        <% if(el.recipeName != '') {%>
-          <h5 class="card-title"><%= el.recipeName %></h5>
-          <h6 class="card-subtitle mb-2 text-muted">Category: <%= el.category %></h6>
-          <a href="/recipes/fullRecipe/<%= el._id%>" class="card-link">View Recipe</a>
-          <% } %>
+          <h5 class="card-title"><%= recipes[i].recipeName%></h5>
+          <h6 class="card-subtitle mb-2 text-muted">Category: <%= recipes[i].category %></h6>
+          <a href="/recipes/fullRecipe/<%= recipes[i]._id%>" class="btn btn-outline-primary">View Recipe</a>
         </div>
-        <% }) %>
       </div>
-</section>
+    </div>
+    <% } %>
+  </div>
+</div>
+
+<!-- <section>
+    <div class="container text-center">
+        <div class="row align-items-center">
+        <% recipes.forEach( el => { %>
+            <div class="col"><div class="card" style="width: 18rem;" data-id="<%=el._id%>">
+                    <div class="card-body">
+                        <% if(el.recipeName != '') {%>
+                        <h5 class="card-title"><%= el.recipeName %></h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Category: <%= el.category %></h6>
+                        <a href="/recipes/fullRecipe/<%= el._id%>" class="card-link">View Recipe</a>
+                        <% } %>
+                    </div>
+                    <% }) %>
+            </div>
+        </div>
+    </div>    
+    
+
+</section> -->
 <!---------------------Add new recipe------------------------->
     <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -61,7 +85,7 @@
             <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Add New Recipe</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
