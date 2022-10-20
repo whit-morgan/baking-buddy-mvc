@@ -8,27 +8,30 @@
          
           <div class="container">
             <h3>Category: <%= recipe.category %></h3>
+
+            <div class="btn-group">
+              <a href="/recipes" class="btn btn-outline-primary" aria-current="page">My Recipes</a>
+              <a href="/recipes/publicRecipes" class="btn btn-outline-primary">Public Recipes</a>
+            </div>
           </div>
-          <div class="container">
-            <a href="/recipes"><button type="button" class="btn btn-primary">My Recipes</button></a> 
-           </div>
-           <div class="container">
-            <a href="/recipes/publicRecipes"><button type="button" class="btn btn-primary">Public Recipes</button></a> 
-           </div>
+
+          
+
           <div class="container border">              
             <p><%- recipe.instructions %></p>
+            <%if(recipe.userId == user.id){ %>
+              <form
+                action="/recipes/deleteRecipe/<%= recipe.id %>?_method=DELETE"
+                method="POST"
+                class="col-3"
+              >
+                <button class="btn btn-outline-danger" type="submit">Delete Recipe</button>
+              </form>
+              <%}%>
           </div>
     </section>
 
-    <%if(recipe.userId == user.id){ %>
-      <form
-        action="/recipes/deleteRecipe/<%= recipe.id %>?_method=DELETE"
-        method="POST"
-        class="col-3"
-      >
-        <button class="btn btn-primary" type="submit">Delete Recipe</button>
-      </form>
-      <%}%>
+
     
 
 <%- include('partials/footer') -%>
