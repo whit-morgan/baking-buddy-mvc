@@ -39,6 +39,25 @@
 <!-- Saved Recipes Cards -->
 <div class="container card-container">
     <h1>My Recipes</h1>
+
+    <!-- Buttons for adding new recipe (triggers modal) and filtering by category -->
+    
+    <div class="btn-group" role="group" aria-label="Button group with nested dropdown" id="addAndFilterBtn">
+        <button type="button" class="btn btn-outline-primary">Add Recipe</button>
+      
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Filter by Category
+          </button>
+          <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="/recipes">All</a></li>
+          <li><a class="dropdown-item" href="/recipes/category/cookie">Cookie</a></li>
+          <li><a class="dropdown-item" href="/recipes/category/muffin">Muffin</a></li>
+          <li><a class="dropdown-item" href="/recipes/category/pie">Pie</a></li>
+      </ul>
+        </div>
+      </div>
+
   <div class="row row-cols-1 row-cols-md-3 g-4">
     <% for(var i=0; i < recipes.length; i++) {%>
     <div class="col">
@@ -55,30 +74,12 @@
   </div>
 </div>
 
-<!-- <section>
-    <div class="container text-center">
-        <div class="row align-items-center">
-        <% recipes.forEach( el => { %>
-            <div class="col"><div class="card" style="width: 18rem;" data-id="<%=el._id%>">
-                    <div class="card-body">
-                        <% if(el.recipeName != '') {%>
-                        <h5 class="card-title"><%= el.recipeName %></h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Category: <%= el.category %></h6>
-                        <a href="/recipes/fullRecipe/<%= el._id%>" class="card-link">View Recipe</a>
-                        <% } %>
-                    </div>
-                    <% }) %>
-            </div>
-        </div>
-    </div>    
-    
 
-</section> -->
 <!---------------------Add new recipe------------------------->
     <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Add Recipe
-        </button>
+        </button> -->
         
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -135,7 +136,7 @@
         </div>
 
     <!-- Filter by Category  -->
-    <div class="dropdown">
+    <!-- <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
           Filter by Category
         </button>
@@ -145,7 +146,7 @@
             <li><a class="dropdown-item" href="/recipes/category/muffin">Muffin</a></li>
             <li><a class="dropdown-item" href="/recipes/category/pie">Pie</a></li>
         </ul>
-      </div>
+      </div> -->
 
 
 <%- include('partials/footer') -%>

@@ -41,6 +41,10 @@ i{
     background-color: #212529;
     color: white;
 }
+#addAndFilterBtn{
+    margin-top: 1%;
+    margin-bottom: 2%;
+}
 /* @media (max-width: 480px) {
     .granMainPic{
         display: none !important;
