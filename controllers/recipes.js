@@ -32,7 +32,7 @@ module.exports = {
     createRecipe: async (req, res)=>{
       console.log('form submit')
         try{
-            await Recipe.create({recipeName: req.body.recipeName, userId: req.user.id, category:req.body.category,makePublic: req.body.makePublic, instructions: req.body.instructions})
+            await Recipe.create({recipeName: req.body.recipeName, userId: req.user.id, userName: req.user.userName, category:req.body.category,makePublic: req.body.makePublic, instructions: req.body.instructions})
             console.log('Recipe has been added!')
             res.redirect('/recipes')
         }catch(err){

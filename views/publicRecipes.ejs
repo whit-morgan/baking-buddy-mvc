@@ -2,20 +2,24 @@
 <%- include('partials/header') -%>
 
 <!-- Public Recipes Cards -->
-<% publicRecipes.filter( el => { %>
-    <% if(el.userId != user._id) {%>
-    <div class="card" style="width: 18rem;" data-id="<%=el._id%>">
-        <div class="card-body">
+
+<div class="container card-container">
+  <h1>Public Recipes</h1>
         
-          <h5 class="card-title"><%= el.recipeName %></h5>
-          <h6 class="card-subtitle mb-2 text-muted">Category: <%= el.category %></h6>
-          <a href="/recipes/fullRecipe/<%= el._id%>" class="card-link">View Recipe</a>
-          <% } %>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <% for(var i=0; i < publicRecipes.length; i++) {%>
+    <div class="col">
+      <div class="card h-100">
+        
+        <div class="card-body">
+          <h5 class="card-title"><%= publicRecipes[i].recipeName%></h5>
+          <h6 class="card-subtitle mb-2 text-muted">Added by: <%= publicRecipes[i].userName %></h6>
+          <a href="/recipes/fullRecipe/<%= publicRecipes[i]._id%>" class="btn btn-outline-primary">View Recipe</a>
         </div>
-        <% }) %>
       </div>
-
-
-
+    </div>
+    <% } %>
+  </div>
+</div>
 <!-- Footer -->
 <%- include('partials/footer') -%>
