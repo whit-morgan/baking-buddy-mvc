@@ -1,90 +1,105 @@
 <%- include('partials/header') -%>
-<!---------Recipes by Category Cards------->
-    <section>
-    <h1>recipe categories</h1>
-    <% recipesByCategory.forEach( el => { %>
-        <div class="card" style="width: 18rem;" data-id="<%=el._id%>">
-            <div class="card-body">
-            <% if(el.recipeName != '' && el.userId == user._id) {%>
-              <h5 class="card-title"><%= el.recipeName %></h5>
-              <h6 class="card-subtitle mb-2 text-muted">Category: <%= el.category %></h6>
-              <a href="/recipes/fullRecipe/<%= el._id%>" class="card-link">View Recipe</a>
-              <% } %>
-            </div>
-            <% }) %>
-          </div>
-    </section>
-<!---------------------Add new recipe------------------------->
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Add Recipe
-    </button>
-    
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="mb-3">
-                    <!--Add new recipe form-->
-                    <form action="/recipes/createRecipe" method="POST">
-                        <!--Recipe Name-->
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="Recipe Name" name="recipeName">
-                            <label for="floatingInput">Recipe Name</label>
-                        </div>
-                            </div>
-                            <!--Category-->
-                                <div class="mb-3">
-                                <select class="form-select" aria-label="Default select example" name="category">
-                                    <option selected>Category</option>
-                                    <option value="cookie">Cookie</option>
-                                    <option value="cake">Cake</option>
-                                    <option value="cupcake">Cupcake</option>
-                                    <option value="pie">Pie</option>
-                                    <option value="pastry">Pastry</option>
-                                    <option value="muffin">Muffin</option>
-                                    <option value="bread">Bread</option>
-                                </select>
-                                </div>
-                                <!--Public or Private Recipe-->
-                                <div class="mb-3">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="makePublic">
-                                        <label class="form-check-label" for="flexSwitchCheckDefault">Make Recipe Public</label>
-                                      </div>
-                                </div>
-                                <!--Recipe Details-->
-                                <div class="mb-3">
-                                    <label for="exampleFormControlTextarea1" class="form-label">Recipe Details</label>
-                                    <textarea type="text" placeholder="Add your ingredients, instructions, and any notes here." name="instructions" id="instructions"></textarea>
-                                </div>
-                            </div>
-                            <!--Submit Recipe-->
-                            <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save recipe</button>
-                            </div>
-                    </form>
-        </div>
-        </div>
-    </div>
 
-<!-- Filter by Category  -->
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown button
-            </button>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="/recipes">All</a></li>
-                <li><a class="dropdown-item" href="/recipes/category/cookie">Cookie</a></li>
-                <li><a class="dropdown-item" href="/recipes/category/muffin">Muffin</a></li>
-                <li><a class="dropdown-item" href="/recipes/category/pie">Pie</a></li>
-            </ul>
-          </div>
+
+<!-- Saved Recipes Cards -->
+<div class="container card-container">
+    <h1>Category: <%= category %></h1>
+
+    <!-- Buttons for adding new recipe (triggers modal) and filtering by category -->
+    
+    <div class="btn-group" role="group" aria-label="Button group with nested dropdown"  id="addAndFilterBtn">
+        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Recipe</button>
+      
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Filter by Category
+          </button>
+          <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="/recipes">All</a></li>
+          <li><a class="dropdown-item" href="/recipes/category/cookie">Cookie</a></li>
+          <li><a class="dropdown-item" href="/recipes/category/muffin">Muffin</a></li>
+          <li><a class="dropdown-item" href="/recipes/category/cake">Cake</a></li>
+          <li><a class="dropdown-item" href="/recipes/category/cupcake">Cupcake</a></li>
+          <li><a class="dropdown-item" href="/recipes/category/pie">Pie</a></li>
+          <li><a class="dropdown-item" href="/recipes/category/pastry">Pastry</a></li>
+          <li><a class="dropdown-item" href="/recipes/category/bread">Bread</a></li>
+      </ul>
+        </div>
+      </div>
+
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <% for(let i=0; i < recipesByCategory.length; i++) {%>
+    <div class="col">
+      <div class="card h-100">
+        
+        <div class="card-body">
+          <h5 class="card-title"><%= recipesByCategory[i].recipeName%></h5>
+          <h6 class="card-subtitle mb-2 text-muted">Category: <%= recipesByCategory[i].category %></h6>
+          <a href="/recipes/fullRecipe/<%= recipesByCategory[i]._id%>" class="btn btn-outline-primary">View Recipe</a>
+        </div>
+      </div>
+    </div>
+    <% } %>
+  </div>
+</div>
+
+
+<!---------------------Add new recipe------------------------->
+        
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add New Recipe</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <!--Add new recipe form-->
+                        <form action="/recipes/createRecipe" method="POST">
+                            <!--Recipe Name-->
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="floatingInput" placeholder="Recipe Name" name="recipeName">
+                                <label for="floatingInput">Recipe Name</label>
+                            </div>
+                                </div>
+                                <!--Category-->
+                                    <div class="mb-3">
+                                    <select class="form-select" aria-label="Default select example" name="category">
+                                        <option selected>Category</option>
+                                        <option value="cookie">Cookie</option>
+                                        <option value="cake">Cake</option>
+                                        <option value="cupcake">Cupcake</option>
+                                        <option value="pie">Pie</option>
+                                        <option value="pastry">Pastry</option>
+                                        <option value="muffin">Muffin</option>
+                                        <option value="bread">Bread</option>
+                                    </select>
+                                    </div>
+                                    <!--Public or Private Recipe-->
+                                    <div class="mb-3">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="makePublic">
+                                            <label class="form-check-label" for="flexSwitchCheckDefault">Make Recipe Public</label>
+                                          </div>
+                                    </div>
+                                    <!--Recipe Details-->
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Recipe Details</label>
+                                        <textarea type="text" placeholder="Add your ingredients, instructions, and any notes here." name="instructions" id="instructions"></textarea>
+                                    </div>
+                                </div>
+                                <!--Submit Recipe-->
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save recipe</button>
+                                </div>
+                        </form>
+            </div>
+            </div>
+        </div>
+
+
 
 <%- include('partials/footer') -%>
