@@ -21,19 +21,47 @@
           <div class="container border">              
             <p><%- recipe.instructions %></p>
             <%if(recipe.userId == user.id){ %>
-              <form
-                action="/recipes/deleteRecipe/<%= recipe.id %>?_method=DELETE"
-                method="POST"
-                class="col-3"
-              >
-                <button class="btn btn-outline-danger" type="submit">Delete Recipe</button>
-              </form>
+              <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteWarning">
+                Delete Recipe
+              </button>
               <%}%>
           </div>
     </section>
 
+<!-- Delete Recipe Warning Modal -->
+<div class="modal fade" id="deleteWarning" tabindex="-1" aria-labelledby="deleteWarningModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="deleteWarningModal">Are you sure?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        This will permanently delete your recipe! If it's public, others will no longer be able to see it.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <form
+                action="/recipes/deleteRecipe/<%= recipe.id %>?_method=DELETE"
+                method="POST"
+                class="col-4"
+              >
+                <button class="btn btn-outline-danger" type="submit">Delete Recipe</button>
+              </form>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <!-- Unit Conversion Modal -->
+
+
+
+
+
+
+    
+
+    <!------------------------ Unit Conversion Modal ------------------------>
     <div class="modal fade" id="unitConversionModal" tabindex="-1" aria-labelledby="unitConversionModalLabel" aria-hidden="true">
       <div class="modal-dialog">
       <div class="modal-content">
@@ -48,7 +76,28 @@
                   <option value="">Select Ingredient</option>
                   <option value="all-purpose flour">All-Purpose Flour</option>
                   <option value="almond flour">Almond Flour</option>
-                  <option value="3">Three</option>
+                  <option value="baking powder">Baking Powder</option>
+                  <option value="baking soda">Baking Soda</option>
+                  <option value="bread flour">Bread Flour</option>
+                  <option value="brown sugar">Brown Sugar</option>
+                  <option value="butter">Butter</option>
+                  <option value="buttermilk">Buttermilk</option>
+                  <option value="cake flour">Cake Flour</option>
+                  <option value="chocolate chips">Chocolate Chips</option>
+                  <option value="cream cheese">Cream Cheese</option>
+                  <option value="cocoa powder">Cocoa Powder</option>
+                  <option value="corn meal">Corn Meal</option>
+                  <option value="granulated sugar">Granulated Sugar</option>
+                  <option value="heavy cream">Heavy Cream</option>
+                  <option value="milk">Milk</option>
+                  <option value="molasses">Molasses</option>
+                  <option value="powdered sugar">Powdered Sugar</option>
+                  <option value="sour cream">Sour Cream</option>
+                  <option value="oats">Oats</option>
+                  <option value="vegetable oil">Vegetable Oil</option>
+                  <option value="walnuts">Walnuts</option>
+                  <option value="kosher salt">Salt</option>
+                  <option value="sea salt">Sea Salt</option>
                 </select>
                 
 
@@ -61,9 +110,11 @@
                       <option value="gramsToCups">Grams to Cups</option>
                     </select>
                   </div>
-                          <!-- Amount Input -->
-                                          <input type="text" name="" id="amountToConvert" placeholder="Amount">
-                  <p id="showConverted">converted will go here</p>
+                <!-- Amount Input -->
+                <input type="text" name="" id="amountToConvert" placeholder="Amount">
+                
+                <!-- Display converted amount -->
+                <p id="showConverted"></p>
               </div>
 
                           <!--Submit Recipe-->

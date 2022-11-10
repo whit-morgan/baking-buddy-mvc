@@ -45,6 +45,9 @@ i{
     margin-top: 1%;
     margin-bottom: 2%;
 }
+#amountToConvert{
+    width: 50%;
+}
 /* @media (max-width: 480px) {
     .granMainPic{
         display: none !important;

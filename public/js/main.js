@@ -55,19 +55,27 @@ let converted
 //     document.querySelector('#showConverted').innerText=`${amount} cup(s) of ${ingredientToConvert} = ${converted} grams`
 // }
 
+//NOTE TO SELF, NEST THIS SWITCH INTO ANOTHER SWITCH
+// if(ingredientToConvert == 'all-purpose flour'){
+//     switch(convertFrom){
+//         case 'cupsToGrams':
+//             converted = amount * gramsPerCup[`${ingredientToConvert}`]
+//             document.querySelector('#showConverted').innerText=`${amount} cup(s) of ${ingredientToConvert} = ${converted} grams`
+//         break
 
-if(ingredientToConvert == 'all-purpose flour'){
-    switch(convertFrom){
-        case 'cupsToGrams':
-            converted = amount * gramsPerCup[`${ingredientToConvert}`]
-            document.querySelector('#showConverted').innerText=`${amount} cup(s) of ${ingredientToConvert} = ${converted} grams`
-        break
+//         case 'gramsToCups':
+//             converted = (amount / gramsPerCup[`${ingredientToConvert}`]).toFixed(2)
+//             document.querySelector('#showConverted').innerText=`${amount} grams of ${ingredientToConvert} = ${converted} cups`
+//         break
+//     }
+// }
 
-        case 'gramsToCups':
-            converted = (amount / gramsPerCup[`${ingredientToConvert}`]).toFixed(2)
-            document.querySelector('#showConverted').innerText=`${amount} grams of ${ingredientToConvert} = ${converted} cups`
-        break
-    }
+if(convertFrom === 'cupsToGrams'){
+    converted = amount * gramsPerCup[`${ingredientToConvert}`]
+    document.querySelector('#showConverted').innerText=`${amount} cup(s) of ${ingredientToConvert} = ${converted} grams`
+}else if(convertFrom === 'gramsToCups'){
+    converted = (amount / gramsPerCup[`${ingredientToConvert}`]).toFixed(2)
+    document.querySelector('#showConverted').innerText=`${amount} grams of ${ingredientToConvert} = ${converted} cups`
 }
 
 }
