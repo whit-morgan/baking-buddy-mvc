@@ -22,7 +22,7 @@ module.exports = {
   },
   getRecipesByCategory: async (req,res)=>{
     try{
-        const recipesByCategory = await Recipe.find({category:req.params.category})
+        const recipesByCategory = await Recipe.find({userId:req.user.id, category:req.params.category})
         res.render('recipesCategory.ejs', { recipesByCategory: recipesByCategory, user: req.user, category: req.params.category})
         console.log(recipesByCategory, req.user) 
     }catch(err){
