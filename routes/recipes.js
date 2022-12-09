@@ -9,6 +9,8 @@ router.get('/fullRecipe/:id', recipesController.showFullRecipe)
 
 router.get('/category/:category', recipesController.getRecipesByCategory)
 
+router.get('/publiccategory/:category', recipesController.getPublicRecipesByCategory)
+
 router.get('/publicRecipes', recipesController.getPublicRecipes) 
 
 router.post('/createRecipe', recipesController.createRecipe)

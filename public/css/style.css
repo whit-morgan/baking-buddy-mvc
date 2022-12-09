@@ -48,8 +48,6 @@ i{
 #amountToConvert{
     width: 50%;
 }
-/* @media (max-width: 480px) {
-    .granMainPic{
-        display: none !important;
-    }
-} */
+#categoryDropdown{
+    padding: 1% 0 2% 0;
+}

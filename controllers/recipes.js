@@ -29,6 +29,15 @@ module.exports = {
         console.log(err)
     }
 },
+getPublicRecipesByCategory: async (req,res)=>{
+    try{
+        const publicRecipesByCategory = await Recipe.find({userId:req.user.id, category:req.params.category})
+        res.render('publicRecipesCategory.ejs', { publicRecipesByCategory: publicRecipesByCategory, user: req.user, category: req.params.category})
+        console.log(publicRecipesByCategory,) 
+    }catch(err){
+        console.log(err)
+    }
+},
     createRecipe: async (req, res)=>{
       console.log('form submit')
         try{
