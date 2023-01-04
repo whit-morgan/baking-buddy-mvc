@@ -25,6 +25,11 @@ const RecipeSchema = new mongoose.Schema({
     type: String,
     required: false
   },
+  favorites: {
+    type: Array,
+    required: true
+  },
+  
 });
 
 module.exports = mongoose.model('Recipe', RecipeSchema)

@@ -13,7 +13,13 @@ router.get('/publiccategory/:category', recipesController.getPublicRecipesByCate
 
 router.get('/publicRecipes', recipesController.getPublicRecipes) 
 
+router.get('/favorites', recipesController.getFavorites) 
+
+router.post('/addFavorite', recipesController.addFavorite)
+
 router.post('/createRecipe', recipesController.createRecipe)
+
+router.put('/addFavorite/:id', recipesController.addFavorite)
 
 router.delete('/deleteRecipe/:id', recipesController.deleteRecipe)
 

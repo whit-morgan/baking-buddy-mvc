@@ -20,6 +20,15 @@ module.exports = {
           console.log(err)
       }
   },
+  getFavorites: async (req,res)=>{
+    try{
+        const recipes = await Recipe.find()
+        res.render('favoriteRecipes.ejs', {recipes: recipes, user: req.user})
+        console.log('ayyye check out my favorite recipes!') 
+    }catch(err){
+        console.log(err)
+    }
+},
   getRecipesByCategory: async (req,res)=>{
     try{
         const recipesByCategory = await Recipe.find({userId:req.user.id, category:req.params.category})
@@ -29,7 +38,7 @@ module.exports = {
         console.log(err)
     }
 },
-getPublicRecipesByCategory: async (req,res)=>{
+  getPublicRecipesByCategory: async (req,res)=>{
     try{
         const publicRecipesByCategory = await Recipe.find({userId:req.user.id, category:req.params.category})
         res.render('publicRecipesCategory.ejs', { publicRecipesByCategory: publicRecipesByCategory, user: req.user, category: req.params.category})
@@ -48,6 +57,45 @@ getPublicRecipesByCategory: async (req,res)=>{
             console.log(err)
         }
     },
+    addFavorite: async (req, res)=>{
+        let favorited = false
+    
+          try{
+              const recipe = await Recipe.findById({_id: req.params.id});
+              favorited = (recipe.favorites.includes(req.user.id))
+              
+          }catch(err){
+              console.log(err)
+          }
+          //if already bookmarked remove user from favorites array
+          if(favorited){
+            try{
+              await Recipe.findOneAndUpdate({_id:req.params.id},
+                {
+                  $pull : {'favorites' : req.user.id}
+                })
+                
+                console.log('Removed user from favorites array')
+                res.redirect('back')
+              }catch(err){
+                console.log(err)
+              }
+            }
+            //else add user to favorited array
+            else{
+              try{
+                await Recipe.findOneAndUpdate({_id:req.params.id},
+                  {
+                    $addToSet : {'favorites' : req.user.id}
+                  })
+                  
+                  console.log('Added user to favorites array')
+                  res.redirect('back')
+              }catch(err){
+                  console.log(err)
+              }
+            }
+      },
     showFullRecipe: async (req, res) => {
         try {
             const recipe = await Recipe.findById(req.params.id);

@@ -13,12 +13,24 @@
               <a href="/recipes" class="btn btn-outline-primary" aria-current="page">My Recipes</a>
               <a href="/recipes/publicRecipes" class="btn btn-outline-primary">Public Recipes</a>
               <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#unitConversionModal">Unit Converter</button>
-            </div>
+              <!-- ///////////////////////////////////////////// -->
+              <form
+                class="col justify-content-end"
+                action="/recipes/addFavorite/<%= recipe.id %>?_method=PUT"
+                method="POST"
+              >
+              <button class="<%if(recipe.favorites.includes(user.id)){ %> bi bi-suit-heart-fill<%} else { %> bi bi-suit-heart <% }%>
+                btn btn-outline-danger " type="submit"></button>
+              </form>
+              
+                </div>
           </div>
-
+<!-- ///////////////////////////////////////////// -->
           
 
-          <div class="container border">              
+
+          <div class="container border">
+                          
             <p><%- recipe.instructions %></p>
             <%if(recipe.userId == user.id){ %>
               <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteWarning">
