@@ -65,7 +65,7 @@ module.exports = {
               favorited = (recipe.favorites.includes(req.user.id))
               
           }catch(err){
-              console.log(err)
+              console.log(err) 
           }
           //if already bookmarked remove user from favorites array
           if(favorited){
@@ -95,6 +95,21 @@ module.exports = {
                   console.log(err)
               }
             }
+      },
+      updateRecipe: async (req, res) => {
+        try{
+          
+          await Recipe.findOneAndUpdate({_id:req.params.id},
+            {
+              $set : {'recipeName' : req.body.recipeName, 'makePublic': req.body.makePublic, 'instructions' : req.body.instructions}
+            },
+
+            )        
+            console.log('Updated recipe')
+            res.redirect('back')
+        }catch(err){
+            console.log(err) 
+        }
       },
     showFullRecipe: async (req, res) => {
         try {
